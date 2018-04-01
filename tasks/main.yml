@@ -1,0 +1,45 @@
+---
+- name: Install packages with apt
+  include: apt.yml
+  when: ansible_pkg_mgr == "apt"
+
+- name: Install packages with dnf
+  include: dnf.yml
+  when: ansible_pkg_mgr == "dnf"
+
+- name: Install packages with yum
+  include: yum.yml
+  when: ansible_pkg_mgr == "yum"
+
+- name: stat {{ git_lfs_server__executable_path }}
+  stat:
+    path: "{{ git_lfs_server__executable_path }}"
+  register: p
+
+- name: go get {{ git_lfs_server__go_package }}
+  command: go get "{{ git_lfs_server__go_package }}"
+  environment:
+    GOPATH: "{{ git_lfs_server__go_path }}"
+  when: p.stat.exists == false
+
+- name: go build
+  command: go build
+  args:
+    chdir: "{{ git_lfs_server__go_path }}/src/{{ git_lfs_server__go_package }}"
+  environment:
+    GOPATH: "{{ git_lfs_server__go_path }}"
+  when: p.stat.exists == false
+
+- name: Template {{ git_lfs_server__systemd_unit_path }}
+  template:
+    src: git-lfs-server.service
+    dest: "{{ git_lfs_server__systemd_unit_path }}"
+  notify: restart git-lfs-server
+  when: git_lfs_server__enable_service
+
+- name: Enable git-lfs-server.service
+  systemd:
+    name: git-lfs-server.service
+    enabled: true
+  notify: restart git-lfs-server
+  when: git_lfs_server__enable_service

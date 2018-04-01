@@ -1,0 +1,6 @@
+---
+- name: Install packages
+  dnf:
+    name: "{{ item }}"
+  with_items:
+    - "{{ git_lfs_server__dnf_packages }}"
