@@ -1,4 +1,4 @@
-.PHONY: converge destroy test
+.PHONY: converge destroy install test
 
 converge:
 	pipenv run molecule converge
@@ -6,5 +6,8 @@ converge:
 destroy:
 	pipenv run molecule destroy
 
-test:
+install:
+	pipenv install
+
+test: install
 	pipenv run molecule test
