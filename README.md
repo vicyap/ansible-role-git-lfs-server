@@ -1,5 +1,9 @@
 # git-lfs-server
 
+[![Build Status](https://travis-ci.org/vicyap/ansible-role-git-lfs-server.svg?branch=master)](https://travis-ci.org/vicyap/ansible-role-git-lfs-server)
+
+---
+
 `git-lfs-server` will clone and install <https://github.com/git-lfs/lfs-test-server>.
 This role also configures a systemd service unit to run the server.
 
