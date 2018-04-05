@@ -9,5 +9,5 @@ destroy:
 install:
 	pipenv install
 
-test: install
+test:
 	pipenv run molecule test
