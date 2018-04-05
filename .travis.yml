@@ -6,10 +6,6 @@ services:
 
 jobs:
   include:
-    - install: pip install pipenv && pipenv install && pipenv run pip install "ansible>=2.0,<2.1"
-      script: make test
-    - install: pip install pipenv && pipenv install && pipenv run pip install "ansible>=2.1,<2.2"
-      script: make test
     - install: pip install pipenv && pipenv install && pipenv run pip install "ansible>=2.2,<2.3"
       script: make test
     - install: pip install pipenv && pipenv install && pipenv run pip install "ansible>=2.3,<2.4"
