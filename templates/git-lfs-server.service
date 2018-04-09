@@ -4,20 +4,20 @@ Description=Git LFS Server
 [Service]
 Type=simple
 ExecStart={{ git_lfs_server__executable_path }}
-Environment="LFS_LISTEN={{ git_lfs_server__lfs_listen }}"
-Environment="LFS_HOST={{ git_lfs_server__lfs_host }}"
-Environment="LFS_METADB={{ git_lfs_server__lfs_metadb }}"
-Environment="LFS_CONTENTPATH={{ git_lfs_server__lfs_contentpath }}"
-Environment="LFS_ADMINUSER={{ git_lfs_server__lfs_adminuser }}"
-Environment="LFS_ADMINPASS={{ git_lfs_server__lfs_adminpass }}"
-Environment="LFS_SCHEME={{ git_lfs_server__lfs_scheme }}"
-{% if git_lfs_server__lfs_scheme == "https" %}
-Environment="LFS_KEY={{ git_lfs_server__lfs_key }}"
-Environment="LFS_CERT={{ git_lfs_server__lfs_cert }}"
+Environment="LFS_LISTEN={{ lfs_listen }}"
+Environment="LFS_HOST={{ lfs_host }}"
+Environment="LFS_METADB={{ lfs_metadb }}"
+Environment="LFS_CONTENTPATH={{ lfs_contentpath }}"
+Environment="LFS_ADMINUSER={{ lfs_adminuser }}"
+Environment="LFS_ADMINPASS={{ lfs_adminpass }}"
+Environment="LFS_SCHEME={{ lfs_scheme }}"
+{% if lfs_scheme == "https" %}
+Environment="LFS_KEY={{ lfs_key }}"
+Environment="LFS_CERT={{ lfs_cert }}"
 {% endif %}
 {% if git_lfs_server__lfs_usetus %}
-Environment="LFS_USETUS={{ git_lfs_server__lfs_usetus }}"
-Environment="LFS_TUSHOST={{ git_lfs_server__lfs_tushost }}"
+Environment="LFS_USETUS=1"
+Environment="LFS_TUSHOST={{ lfs_tushost }}"
 {% endif %}
 
 [Install]

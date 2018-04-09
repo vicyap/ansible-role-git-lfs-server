@@ -35,11 +35,11 @@
     src: git-lfs-server.service
     dest: "{{ git_lfs_server__systemd_unit_path }}"
   notify: restart git-lfs-server
-  when: git_lfs_server__enable_service
+  when: lfs_enable_service
 
 - name: Enable git-lfs-server.service
   systemd:
     name: git-lfs-server.service
     enabled: true
   notify: restart git-lfs-server
-  when: git_lfs_server__enable_service
+  when: lfs_enable_service
