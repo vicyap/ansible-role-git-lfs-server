@@ -13,7 +13,7 @@ name = "pypi"
 
 molecule = "*"
 docker-py = "*"
-ansible = ">=2.2,<2.3"
+ansible = ">=2.2,<2.7"
 
 
 [requires]
